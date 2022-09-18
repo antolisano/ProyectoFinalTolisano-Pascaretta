@@ -4,4 +4,5 @@ from AppProyectoFinalTolisanoPascaretta import Doctores, Pacientes, Especialidad
 
 def datosdoctores (self):
     listadoctores = []
+    nombre = 
     
