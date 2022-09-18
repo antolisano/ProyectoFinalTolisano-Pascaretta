@@ -4,5 +4,5 @@ from AppProyectoFinalTolisanoPascaretta import Doctores, Pacientes, Especialidad
 
 def datosdoctores (self):
     listadoctores = []
-    nombre1 = nombre1
+    nombre2 = nombre2
     
