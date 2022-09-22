@@ -6,3 +6,4 @@ def datosdoctores (self):
     listadoctores = []
     nombre2 = nombre2
     
+MODIFICACION = 'MODIFICACIONES'
