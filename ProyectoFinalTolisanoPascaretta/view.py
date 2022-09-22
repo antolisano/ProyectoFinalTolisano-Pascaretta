@@ -4,5 +4,5 @@ from AppProyectoFinalTolisanoPascaretta import Doctores, Pacientes, Especialidad
 
 def datosdoctores (self):
     listadoctores = []
-    borrar=borrar  
+  
     
