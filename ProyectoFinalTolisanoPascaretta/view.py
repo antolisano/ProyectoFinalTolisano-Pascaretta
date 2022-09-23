@@ -6,3 +6,4 @@ def datosdoctores (self):
     listadoctores = []
   
 variable = '1'
+variable = 2
