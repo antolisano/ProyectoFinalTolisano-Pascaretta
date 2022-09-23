@@ -5,4 +5,4 @@ from AppProyectoFinalTolisanoPascaretta import Doctores, Pacientes, Especialidad
 def datosdoctores (self):
     listadoctores = []
   
-    
+variable = '1'
