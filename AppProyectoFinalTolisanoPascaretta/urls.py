@@ -1,7 +1,7 @@
 from re import template
 from django.urls import path
 from AppProyectoFinalTolisanoPascaretta.views import *
-#from django.contrib.auth.views import LogoutView
+
 
 
 urlpatterns = [
@@ -10,6 +10,5 @@ urlpatterns = [
     path('Inquilinos/', Inquilinos),
     path('Propiedades/', Propiedades),
     path('Propietarios/', Propietarios),
-    #path('api_Propietarios/', api_Propietarios),
     path('buscar_Propietarios/', buscar_Propietarios),
 ]
