@@ -1,13 +1,15 @@
+from re import template
 from django.urls import path
 from AppProyectoFinalTolisanoPascaretta.views import *
-from ProyectoFinalTolisanoPascaretta.ProyectoFinalTolisanoPascaretta.view import home
+#from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    path('', home),
-    path('Contratos/', Contratos),
-    path('Inmobiliaria/', Inmobiliaria),
+    path('', Inmobiliaria),
+    #path('Inmobiliaria/', Inmobiliaria),
     path('Inquilinos/', Inquilinos),
     path('Propiedades/', Propiedades),
     path('Propietarios/', Propietarios),
+    #path('api_Propietarios/', api_Propietarios),
+    path('buscar_Propietarios/', buscar_Propietarios),
 ]

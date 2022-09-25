@@ -21,8 +21,6 @@ class Propiedad(models.Model):
     domicilio = models.CharField(max_length=60)
 
 
-class Contrato(models.Model):
-    fechainicio = models.DateField()
-    fechafin = models.DateField()
+
  
 

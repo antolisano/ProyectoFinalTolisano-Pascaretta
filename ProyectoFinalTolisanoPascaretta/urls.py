@@ -16,11 +16,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from ProyectoFinalTolisanoPascaretta.view import Propietarios, Inquilinos, Propiedades, Contratos,home
+from ProyectoFinalTolisanoPascaretta.view import Inmobiliaria
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home',home),
+    path('Inmobiliaria',Inmobiliaria),
     path("AppProyectoFinalTolisanoPascaretta/",include("AppProyectoFinalTolisanoPascaretta.urls"))
 ]

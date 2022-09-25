@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.template import loader
-from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad, Contrato
+from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad
 
-def home (self,):
+def Inmobiliaria (self):
     return HttpResponse (f"Bienvenidos a Tu Inmobiliaria")
 
 #def Propietarios (self):
@@ -11,7 +11,7 @@ def home (self,):
 
 #def Propiedades(self):
 
-#def Contratos(self):
+
     
                 
   

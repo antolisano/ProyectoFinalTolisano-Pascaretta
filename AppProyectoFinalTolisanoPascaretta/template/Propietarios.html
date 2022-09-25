@@ -1,0 +1,36 @@
+{% extends "Inmobiliaria.html" %}
+
+{% load static %}
+
+
+
+{% block contenido %}
+    <p>Listado de Propietarios</p>
+    <div class="contenidoPropietarios">
+        <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/Propietarios/" method="POST"> {% csrf_token %}
+            <input type="text" name="nombreyapellido" placeholder="nombreyapellido">
+            <input type="number" dni="dni" placeholder="dni">
+            <input type="number" telephone="telefono" placeholder="telefono">
+            <input type="email" name="email" placeholder="email">
+            <button type="submit" class="btn btn-primary btndj">Registrar</button>
+        </form>
+    </div>
+    <div>
+        <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/buscar_Propietario/" method="GET">
+            <input type="dni" name="dni" placeholder="dni">
+            <button type="submit" class="btn btn-primary btndj">Buscar</button>
+        </form>
+    </div>
+    <div>
+        {% if Propietarios %}
+        <ul>
+            {% for Propietario in Propietarios %}
+            <li>{{Propietario.nombrecompleto}}</li>
+            <li>{{Propietario.dni}}</li>
+            <li>{{Propietario.telefono}}</li>
+            <li>{{Propietario.email}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+{% endblock %}
