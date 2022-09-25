@@ -55,7 +55,7 @@ ROOT_URLCONF = 'ProyectoFinalTolisanoPascaretta.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [f"{BASE_DIR}/ProyectoFinalTolisanoPascaretta/templete"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

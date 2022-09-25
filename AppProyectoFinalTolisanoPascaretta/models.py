@@ -5,23 +5,23 @@ from django.db import models
 
     
 
-class Propietarios(models.Model):
+class Propietario(models.Model):
     nombrecompleto = models.CharField(max_length=50)
     dni = models.IntegerField()
     telefono = models.IntegerField()
     email = models.EmailField()
 
-class Inquilinos(models.Model):
+class Inquilino(models.Model):
     nombrecompleto = models.CharField(max_length=50)
     dni = models.IntegerField()
     telefono = models.IntegerField()
     email = models.EmailField()
 
-class Propiedades(models.Model):
+class Propiedad(models.Model):
     domicilio = models.CharField(max_length=60)
 
 
-class Contratos(models.Model):
+class Contrato(models.Model):
     fechainicio = models.DateField()
     fechafin = models.DateField()
  

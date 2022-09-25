@@ -2,13 +2,15 @@ from django.http import HttpResponse
 from django.template import loader
 from AppProyectoFinalTolisanoPascaretta import Propietarios, Inquilinos, Propiedades, Contratos
 
-def Propietarios (self):
+#def Inmobiliaria (self):
 
-def Inquilinos ():
+#def Propietarios (self):
 
-def Propiedades():
+#def Inquilinos (self):
 
-def Contratos():
+#def Propiedades(self):
+
+#def Contratos(self):
     
                 
   
