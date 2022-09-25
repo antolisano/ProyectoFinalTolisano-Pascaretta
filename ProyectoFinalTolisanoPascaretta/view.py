@@ -1,9 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
-from AppProyectoFinalTolisanoPascaretta import Doctores, Pacientes, Especialidades
+from AppProyectoFinalTolisanoPascaretta import Propietarios, Inquilinos, Propiedades, Contratos
 
-def datosdoctores (self):
-    listadoctores = []
+def  (self):
   
-variable = '1'
-variable = 2
