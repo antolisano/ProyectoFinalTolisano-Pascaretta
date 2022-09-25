@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad, Contrato
 
 # Create your views here.
 

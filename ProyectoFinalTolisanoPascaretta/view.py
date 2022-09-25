@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.template import loader
-from AppProyectoFinalTolisanoPascaretta import Propietarios, Inquilinos, Propiedades, Contratos
+from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad, Contrato
 
-#def Inmobiliaria (self):
+def home (self,):
+    return HttpResponse (f"Bienvenidos a Tu Inmobiliaria")
 
 #def Propietarios (self):
 
