@@ -17,11 +17,11 @@ class Inquilinos(models.Model):
     telefono = models.IntegerField()
     email = models.EmailField()
 
-class Propiedades():
+class Propiedades(models.Model):
     domicilio = models.CharField(max_length=60)
 
 
-class Contratos():
+class Contratos(models.Model):
     fechainicio = models.DateField()
     fechafin = models.DateField()
  
