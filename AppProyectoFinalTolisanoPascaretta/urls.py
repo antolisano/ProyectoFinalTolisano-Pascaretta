@@ -6,7 +6,7 @@ from AppProyectoFinalTolisanoPascaretta.views import *
 
 urlpatterns = [
     path('', Inmobiliaria),
-    #path('Inmobiliaria/', Inmobiliaria),
+    path('Inmobiliaria/', Inmobiliaria),
     path('Inquilinos/', Inquilinos),
     path('Propiedades/', Propiedades),
     path('Propietarios/', Propietarios),
