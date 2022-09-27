@@ -5,10 +5,11 @@ from AppProyectoFinalTolisanoPascaretta.views import *
 
 
 urlpatterns = [
-    path('', Inmobiliaria),
-    path('Inmobiliaria/', Inmobiliaria),
-    path('Inquilinos/', Inquilinos),
-    path('Propiedades/', Propiedades),
-    path('Propietarios/', Propietarios),
-    path('buscar_Propietarios/', buscar_Propietarios),
+    path('',Inmobiliaria),
+    path('Inmobiliaria/',Inmobiliaria),
+    path('Inquilinos/',Inquilinos),
+    path('Propiedades/',Propiedades),
+    path('Propietarios/',Propietarios),
+    path('buscar_Propietarios/',buscar_Propietarios),
+    path('api_Propietarios/',api_Propietarios),
 ]

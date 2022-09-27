@@ -11,7 +11,7 @@ def Inmobiliaria (request):
 
 def Propietarios (request):
     if request.method == "POST":
-        propietario = Propietario (nombrecompleto = request.POST["nombrecompleto"], dni = request.POST["dni"], telefono = request.POST["telefono"], email = request.POST["email"])
+        propietario = Propietario(nombrecompleto = request.POST["nombrecompleto"], dni = request.POST["dni"], telefono = request.POST["telefono"], email = request.POST["email"])
         propietario.save()
         return render(request, "Inmobiliaria.html")
     return render (request, "Propietarios.html")
@@ -23,6 +23,18 @@ def buscar_Propietarios (request):
     else:
         respuesta = 'Propietario Inexistente'
     return HttpResponse (respuesta)
+
+def api_Propietarios(request):
+    if request.method == "POST":
+        formulario = form_Propietarios(request.POST)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            propietario = Propietario( nombrecompleto = informacion['nombrecompleto'],dni = informacion['dni'], email = informacion['email'], telefono = informacion['telefono'])
+            propietario.save()
+            return render(request, "api_Propietarios.html")
+    else:
+        formulario = form_Propietarios()
+    return render(request, "api_Propietarios.html", {"formulario": formulario})
 
 
 def Inquilinos (request):

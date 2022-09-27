@@ -1,4 +1,3 @@
-{% extends "Inmobiliaria.html" %}
 
 {% load static %}
 
@@ -6,7 +5,7 @@
     <p>Listado de Propietarios</p>
     <div class="contenidoPropietarios">
         <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/Propietarios/" method="POST"> {% csrf_token %}
-            <input type="text" name="nombreyapellido" placeholder="nombreyapellido">
+            <input type="text" name="nombrecompleto" placeholder="nombrecompleto">
             <input type="number" dni="dni" placeholder="dni">
             <input type="number" telephone="telefono" placeholder="telefono">
             <input type="email" name="email" placeholder="email">
