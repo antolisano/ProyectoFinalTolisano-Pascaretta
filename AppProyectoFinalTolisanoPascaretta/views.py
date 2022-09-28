@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad
 from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios
@@ -11,7 +11,7 @@ def Inmobiliaria (request):
 
 def Propietarios (request):
     if request.method == "POST":
-        propietario = Propietario(nombrecompleto = request.POST["nombrecompleto"], dni = request.POST["dni"], telefono = request.POST["telefono"], email = request.POST["email"])
+        propietario = Propietario(nombrecompleto = request.POST['nombrecompleto'], dni = request.POST['dni'], telefono = request.POST['telefono'], email = request.POST['email'])
         propietario.save()
         return render(request, "Inmobiliaria.html")
     return render (request, "Propietarios.html")
@@ -23,6 +23,15 @@ def buscar_Propietarios (request):
     else:
         respuesta = 'Propietario Inexistente'
     return HttpResponse (respuesta)
+
+#def buscar_Propietarios (request):
+ #   if request.GET["dni"]:
+  #      email = request.GET["dni"]
+   #     propietarios = Propietario.objects.filter(dni__icontains ='dni')
+    #    return render(request, "Propietarios.html", {"propietarios": propietarios})
+    #else:
+     #   respuesta = "No enviaste datos"
+      #  return HttpResponse(respuesta)
 
 def api_Propietarios(request):
     if request.method == "POST":

@@ -12,6 +12,9 @@ class Propietario(models.Model):
     telefono = models.IntegerField()
     email = models.EmailField()
 
+    #def __str__(self):
+       # return f"nombrecompleto:{self.nombrecompleto} - dni:{self.dni} - telefono:{self.telefono} - email:{self.email}"
+
 class Inquilino(models.Model):
     nombrecompleto = models.CharField(max_length=50)
     dni = models.IntegerField()

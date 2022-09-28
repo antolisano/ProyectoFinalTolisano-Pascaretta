@@ -6,8 +6,8 @@
     <div class="contenidoPropietarios">
         <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/Propietarios/" method="POST"> {% csrf_token %}
             <input type="text" name="nombrecompleto" placeholder="nombrecompleto">
-            <input type="number" dni="dni" placeholder="dni">
-            <input type="number" telephone="telefono" placeholder="telefono">
+            <input type="number" name="dni" placeholder="dni">
+            <input type="number" name="telefono" placeholder="telefono">
             <input type="email" name="email" placeholder="email">
             <button type="submit" class="btn btn-primary btndj">Registrar</button>
         </form>
