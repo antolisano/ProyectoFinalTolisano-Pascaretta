@@ -27,8 +27,8 @@ def Propietarios (request):
 def buscar_Propietarios (request):
    if request.GET['dni']:
       dni = request.GET['dni']
-      propietarios = Propietario.objects.filter(dni__icontains = dni)
-      return render(request, "Propietarios.html", {"propietarios": propietarios})
+      Propietarios = Propietario.objects.filter(dni__icontains = dni)
+      return render(request, "Propietarios.html", {"Propietarios": Propietarios})
    else:
      respuesta = "No enviaste datos"
      return HttpResponse(respuesta)
