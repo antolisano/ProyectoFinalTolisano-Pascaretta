@@ -16,22 +16,22 @@ def Propietarios (request):
         return render(request, "Inmobiliaria.html")
     return render (request, "Propietarios.html")
 
-def buscar_Propietarios (request):
-    if request.GET['dni']:
-        dni = request.GET['dni'] 
-        return render (request, 'Propietarios.html', {'Propietarios': Propietario}) 
-    else:
-        respuesta = 'Propietario Inexistente'
-    return HttpResponse (respuesta)
-
 #def buscar_Propietarios (request):
- #   if request.GET["dni"]:
-  #      email = request.GET["dni"]
-   #     propietarios = Propietario.objects.filter(dni__icontains ='dni')
-    #    return render(request, "Propietarios.html", {"propietarios": propietarios})
+ #   if request.GET['dni']:
+  #      dni = request.GET['dni'] 
+   #     return render (request, 'Propietarios.html', {'Propietarios': Propietario}) 
     #else:
-     #   respuesta = "No enviaste datos"
-      #  return HttpResponse(respuesta)
+     #   respuesta = 'Propietario Inexistente'
+    #return HttpResponse (respuesta)
+
+def buscar_Propietarios (request):
+   if request.GET['dni']:
+      dni = request.GET['dni']
+      propietarios = Propietario.objects.filter(dni__icontains = dni)
+      return render(request, "Propietarios.html", {"propietarios": propietarios})
+   else:
+     respuesta = "No enviaste datos"
+     return HttpResponse(respuesta)
 
 def api_Propietarios(request):
     if request.method == "POST":
