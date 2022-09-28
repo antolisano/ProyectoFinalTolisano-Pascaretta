@@ -13,19 +13,19 @@
         </form>
     </div>
     <div>
-        <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/buscar_Propietario/" method="GET">
-            <input type="dni" name="dni" placeholder="dni">
+        <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/buscar_Propietarios/" method="GET">
+            <input type="number" name="dni" placeholder="dni">
             <button type="submit" class="btn btn-primary btndj">Buscar</button>
         </form>
     </div>
     <div>
         {% if Propietarios %}
         <ul>
-            {% for Propietario in Propietarios %}
-            <li>{{Propietario.nombrecompleto}}</li>
-            <li>{{Propietario.dni}}</li>
-            <li>{{Propietario.telefono}}</li>
-            <li>{{Propietario.email}}</li>
+            {% for n in Propietarios %}
+            <li>{{n.nombrecompleto}}</li>
+            <li>{{n.dni}}</li>
+            <li>{{n.telefono}}</li>
+            <li>{{n.email}}</li>
             {% endfor %}
         </ul>
         {% endif %}
