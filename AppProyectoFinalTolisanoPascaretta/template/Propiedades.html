@@ -1,8 +1,8 @@
 
 {% load static %}
-
+<link rel="stylesheet" href="{% static 'css/mystilo.css'%}">
 {% block contenido %}
-    <p>Ingreso de nueva Propiedad</p>
+    <p><h3> Ingreso de nueva Propiedad</h3> </p>
     <div class="contenidoPropiedades">
         <form class="formDataPropiedades" action="/AppProyectoFinalTolisanoPascaretta/Propiedades/" method="POST"> {% csrf_token %}
             <input type="string" name="domicilio" placeholder="Dirección">
@@ -10,7 +10,7 @@
         </form>
     </div>
     <div>
-        <p>Busqueda de Propiedad</p>
+        <p><h3> Busqueda de Propiedad </H3></p>
         <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/buscar_Propiedades/" method="GET">
             <input type="string" name="domicilio" placeholder="Ingrese domicilio">
             <button type="submit" class="btn btn-primary btndj">Buscar</button>

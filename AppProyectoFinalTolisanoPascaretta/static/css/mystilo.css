@@ -1,27 +1,81 @@
 .contenido1{
-    position: relative;
-    top: 60px;
-    border: 1px solid red;
+    position: absolute;
+    top: 300px;
+    border: 10px solid red;
 }
 
 .contenidoPropietarios{
-    background-color: #030354;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    justify-content: left;
+    align-items: left;
+    padding: 50x;
+    font-size: 100%;
+    top: 400px;
 }
 .formDataPropietarios{
     display: flex;
-    flex-direction: column;
-    width: 500px;
-    gap: 10px;
-    background-color: white;
+    width: 1000px;
+    gap: 20px;
+    background-color: rgb(120, 122, 124);
     border-radius: 5px;
-    padding: 20px;
-    color: blue;
+    border-color:rgb(93, 99, 106);
+    padding: 100px;
+    color: rgb(237, 69, 69);
+
+}
+.contenidoInquilinos{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    padding: 50x;
+    font-size: 100%;
+    top: 400px;
+            
+}
+.formDataInquilinos{
+    display: flex;
+    width: 1000px;
+    gap: 20px;
+    background-color: rgb(120, 122, 124);
+    border-radius: 5px;
+    border-color:rgb(93, 99, 106);
+    padding: 100px;
+    color: rgb(237, 69, 69);
+
+}
+.contenidoPropiedades{
+
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    padding: 50x;
+    font-size: 100%;
+    top: 400px;
+}
+.formDataPropiedades{
+    display: flex;
+    width: 1000px;
+    gap: 20px;
+    background-color: rgb(120, 122, 124);
+    border-radius: 5px;
+    border-color:rgb(93, 99, 106);
+    padding: 100px;
+    color: rgb(237, 69, 69);
+
 }
 
 .btndj{
-    border-radius: 20px !important;
+    border-radius: 100px !important;
 }
+button {
+    background-color: #f2b140; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
