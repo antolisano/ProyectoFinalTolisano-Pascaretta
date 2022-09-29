@@ -1,11 +1,12 @@
 
+
 {% load static %}
 
 {% block contenido %}
-    <p>Listado de Propietarios</p>
+    <p>Ingreso de nuevo Propietario</p>
     <div class="contenidoPropietarios">
         <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/Propietarios/" method="POST"> {% csrf_token %}
-            <input type="text" name="nombrecompleto" placeholder="nombrecompleto">
+            <input type="text" name="nombrecompleto" placeholder="nombre completo">
             <input type="number" name="dni" placeholder="dni">
             <input type="number" name="telefono" placeholder="telefono">
             <input type="email" name="email" placeholder="email">
@@ -13,8 +14,9 @@
         </form>
     </div>
     <div>
+        <p>Busqueda de Propietario</p>
         <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/buscar_Propietarios/" method="GET">
-            <input type="number" name="dni" placeholder="dni">
+            <input type="number" name="dni" placeholder="numero de dni">
             <button type="submit" class="btn btn-primary btndj">Buscar</button>
         </form>
     </div>

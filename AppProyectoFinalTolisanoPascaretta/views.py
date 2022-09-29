@@ -16,35 +16,14 @@ def Propietarios (request):
         return render(request, "Inmobiliaria.html")
     return render (request, "Propietarios.html")
 
-#def buscar_Propietarios (request):
- #   if request.GET['dni']:
-  #      dni = request.GET['dni'] 
-   #     return render (request, 'Propietarios.html', {'Propietarios': Propietario}) 
-    #else:
-     #   respuesta = 'Propietario Inexistente'
-    #return HttpResponse (respuesta)
-
 def buscar_Propietarios (request):
    if request.GET['dni']:
       dni = request.GET['dni']
       Propietarios = Propietario.objects.filter(dni__icontains = dni)
       return render(request, "Propietarios.html", {"Propietarios": Propietarios})
    else:
-     respuesta = "No enviaste datos"
+     respuesta = "No se registró ingreso de datos"
      return HttpResponse(respuesta)
-
-def api_Propietarios(request):
-    if request.method == "POST":
-        formulario = form_Propietarios(request.POST)
-        if formulario.is_valid():
-            informacion = formulario.cleaned_data
-            propietario = Propietario( nombrecompleto = informacion['nombrecompleto'],dni = informacion['dni'], email = informacion['email'], telefono = informacion['telefono'])
-            propietario.save()
-            return render(request, "api_Propietarios.html")
-    else:
-        formulario = form_Propietarios()
-    return render(request, "api_Propietarios.html", {"formulario": formulario})
-
 
 def Inquilinos (request):
     if request.method == "POST":
@@ -52,6 +31,15 @@ def Inquilinos (request):
         inquilino.save()
         return render(request, "Inmobiliaria.html")
     return render (request, "Inquilinos.html")
+
+def buscar_Inquilinos (request):
+   if request.GET['dni']:
+      dni = request.GET['dni']
+      Inquilinos = Propietario.objects.filter(dni__icontains = dni)
+      return render(request, "Inquilinos.html", {"Inquilinos": Inquilinos})
+   else:
+     respuesta = "No se registró ingreso de datos"
+     return HttpResponse(respuesta)
 
 def Propiedades(request):
     if request.method == "POST":

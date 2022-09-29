@@ -1,0 +1,27 @@
+.contenido1{
+    position: relative;
+    top: 60px;
+    border: 1px solid red;
+}
+
+.contenidoPropietarios{
+    background-color: #030354;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.formDataPropietarios{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 10px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+    color: blue;
+}
+
+.btndj{
+    border-radius: 20px !important;
+}

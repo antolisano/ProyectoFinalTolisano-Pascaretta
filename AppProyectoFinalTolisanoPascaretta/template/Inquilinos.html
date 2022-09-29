@@ -1,12 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Aca va a ir el formulario Inquilinos...
-</body>
-</html>
+
+
+{% load static %}
+
+{% block contenido %}
+    <p>Ingreso de nuevo Inquilino</p>
+    <div class="contenidoIropietarios">
+        <form class="formDataInquilinos" action="/AppProyectoFinalTolisanoPascaretta/Inquilinos/" method="POST"> {% csrf_token %}
+            <input type="text" name="nombrecompleto" placeholder="nombre completo">
+            <input type="number" name="dni" placeholder="dni">
+            <input type="number" name="telefono" placeholder="telefono">
+            <input type="email" name="email" placeholder="email">
+            <button type="submit" class="btn btn-primary btndj">Registrar</button>
+        </form>
+    </div>
+    <div>
+        <p>Busqueda de Inquilino</p>
+        <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/buscar_Inquilinos/" method="GET">
+            <input type="number" name="dni" placeholder="numero de dni">
+            <button type="submit" class="btn btn-primary btndj">Buscar</button>
+        </form>
+    </div>
+    <div>
+        {% if Inquilinos %}
+        <ul>
+            {% for n in Inquilinos %}
+            <li>{{n.nombrecompleto}}</li>
+            <li>{{n.dni}}</li>
+            <li>{{n.telefono}}</li>
+            <li>{{n.email}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+{% endblock %}
