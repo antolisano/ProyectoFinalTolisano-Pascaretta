@@ -11,5 +11,6 @@ urlpatterns = [
     path('Propiedades/',Propiedades),
     path('Propietarios/',Propietarios),
     path('buscar_Propietarios/',buscar_Propietarios),
-    path('buscar_Inquilinos/',buscar_Inquilinos)
+    path('buscar_Inquilinos/',buscar_Inquilinos),
+    path('buscar_Propiedades/',buscar_Propiedades)
 ]

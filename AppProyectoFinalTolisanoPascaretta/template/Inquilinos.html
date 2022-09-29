@@ -4,7 +4,7 @@
 
 {% block contenido %}
     <p>Ingreso de nuevo Inquilino</p>
-    <div class="contenidoIropietarios">
+    <div class="contenidoInquilinos">
         <form class="formDataInquilinos" action="/AppProyectoFinalTolisanoPascaretta/Inquilinos/" method="POST"> {% csrf_token %}
             <input type="text" name="nombrecompleto" placeholder="nombre completo">
             <input type="number" name="dni" placeholder="dni">

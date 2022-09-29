@@ -35,7 +35,7 @@ def Inquilinos (request):
 def buscar_Inquilinos (request):
    if request.GET['dni']:
       dni = request.GET['dni']
-      Inquilinos = Propietario.objects.filter(dni__icontains = dni)
+      Inquilinos = Inquilino.objects.filter(dni__icontains = dni)
       return render(request, "Inquilinos.html", {"Inquilinos": Inquilinos})
    else:
      respuesta = "No se registró ingreso de datos"
@@ -48,4 +48,12 @@ def Propiedades(request):
         return render(request, "Inmobiliaria.html")
     return render (request, "Propiedades.html")
 
-    
+
+def buscar_Propiedades (request):
+   if request.GET['domicilio']:
+      domicilio = request.GET['domicilio']
+      Propiedades = Propiedad.objects.filter(domicilio__icontains = domicilio)
+      return render(request, "Propiedades.html", {"Propiedades": Propiedades})
+   else:
+     respuesta = "No se registró ingreso de datos"
+     return HttpResponse(respuesta)    

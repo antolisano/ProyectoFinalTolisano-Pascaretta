@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Aca va a ir el formulario Propiedades..
-</body>
-</html>
+
+{% load static %}
+
+{% block contenido %}
+    <p>Ingreso de nueva Propiedad</p>
+    <div class="contenidoPropiedades">
+        <form class="formDataPropiedades" action="/AppProyectoFinalTolisanoPascaretta/Propiedades/" method="POST"> {% csrf_token %}
+            <input type="string" name="domicilio" placeholder="Dirección">
+            <button type="submit" class="btn btn-primary btndj">Registrar</button>
+        </form>
+    </div>
+    <div>
+        <p>Busqueda de Propiedad</p>
+        <form class="formDataPropietarios" action="/AppProyectoFinalTolisanoPascaretta/buscar_Propiedades/" method="GET">
+            <input type="string" name="domicilio" placeholder="Ingrese domicilio">
+            <button type="submit" class="btn btn-primary btndj">Buscar</button>
+        </form>
+    </div>
+    <div>
+        {% if Propiedades %}
+        <ul>
+            {% for n in Propiedades %}
+            <li>{{n.domicilio}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+{% endblock %}
