@@ -1,7 +1,9 @@
-
+{% extends "Inmobiliaria.html" %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/mystilo.css'%}">
 {% block contenido %}
+<br>
+<br>
     <p><h3> Ingreso de nueva Propiedad</h3> </p>
     <div class="contenidoPropiedades">
         <form class="formDataPropiedades" action="/AppProyectoFinalTolisanoPascaretta/Propiedades/" method="POST"> {% csrf_token %}
