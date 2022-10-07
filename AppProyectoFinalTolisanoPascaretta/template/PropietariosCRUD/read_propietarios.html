@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+{% for propietario in propietarios %}
+
+<li> 
+    {{ propietario }} 
+    <a href="/AppProyectoFinalTolisanoPascaretta/update_propietarios/{{propietario.id}}" class="btn btn-warning">Editar</a>
+    <a href="/AppProyectoFinalTolisanoPascaretta/delete_propietarios/{{propietario.id}}" class="btn btn-danger">Borrar</a>
+</li>
+
+<br>
+
+{% endfor %}
+
+<a class="btn btn-success" href="/AppProyectoFinalTolisanoPascaretta/create_propietarios">+ Agregar Propietario</a>
+

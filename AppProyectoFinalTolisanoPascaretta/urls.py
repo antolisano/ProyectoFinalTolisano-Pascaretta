@@ -12,5 +12,12 @@ urlpatterns = [
     path('Propietarios/',Propietarios),
     path('buscar_Propietarios/',buscar_Propietarios),
     path('buscar_Inquilinos/',buscar_Inquilinos),
-    path('buscar_Propiedades/',buscar_Propiedades)
+    path('buscar_Propiedades/',buscar_Propiedades),
+    path('create_propietarios/',create_propietarios),
+    path('read_propietarios/',read_propietarios),
+    path('delete_propietarios/',delete_propietarios),
+    path('update_propietarios/',update_propietarios),
+
+
+    
 ]

@@ -1,3 +1,4 @@
+from operator import truediv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad
@@ -57,3 +58,25 @@ def buscar_Propiedades (request):
    else:
      respuesta = "No se registró ingreso de datos"
      return HttpResponse(respuesta)    
+
+def create_propietarios (request):
+    if request.method == 'POST':
+        propietario = Propietario(nombrecompleto = request.POST['nombrecompleto'], dni = request.POST['dni'], telefono = request.POST['telefono'], email = request.POST['email'])
+        propietario.save()
+        propietarios = Propietario.objects.all()
+        return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
+    return render(request, "PropietariosCRUD/create_propietarios.html")
+
+    
+def read_propietarios (request):
+    propietarios = Propietario.objects.all()
+    return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
+
+def delete_propietarios (request):
+    return False
+
+def update_propietarios (request):
+    return False
+
+
+
