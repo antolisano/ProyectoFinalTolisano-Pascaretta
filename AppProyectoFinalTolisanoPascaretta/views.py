@@ -72,8 +72,12 @@ def read_propietarios (request):
     propietarios = Propietario.objects.all()
     return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
 
-def delete_propietarios (request):
-    return False
+def delete_propietarios (request, propietario_dni):
+    propietario = Propietario.objects.get(dni = propietario_dni)
+    propietario.delete()
+    propietarios = Propietario.objects.all()
+    return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
+
 
 def update_propietarios (request):
     return False
