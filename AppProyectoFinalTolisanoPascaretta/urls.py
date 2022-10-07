@@ -15,8 +15,8 @@ urlpatterns = [
     path('buscar_Propiedades/',buscar_Propiedades),
     path('create_propietarios/',create_propietarios),
     path('read_propietarios/',read_propietarios),
-    path('delete_propietarios/<propietario_dni>',delete_propietarios),
-    path('update_propietarios/',update_propietarios),
+    path('delete_propietarios/<propietario_id>',delete_propietarios),
+    path('update_propietarios/<propietario_id>',update_propietarios),
 
 
     

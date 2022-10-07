@@ -68,19 +68,35 @@ def create_propietarios (request):
     return render(request, "PropietariosCRUD/create_propietarios.html")
 
     
-def read_propietarios (request):
+def read_propietarios (request=None):
     propietarios = Propietario.objects.all()
     return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
 
-def delete_propietarios (request, propietario_dni):
-    propietario = Propietario.objects.get(dni = propietario_dni)
+def delete_propietarios (request, propietario_id):
+    propietario = Propietario.objects.get(id = propietario_id)
     propietario.delete()
     propietarios = Propietario.objects.all()
     return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
 
 
-def update_propietarios (request):
-    return False
+def update_propietarios (request, propietario_id):
+    propietario = Propietario.objects.get(id = propietario_id)
+
+    if request.method == 'POST':
+        formulario = form_Propietarios(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            propietario.nombrecompleto = informacion['nombrecompleto']
+            propietario.dni = informacion['dni']
+            propietario.telefono = informacion['telefono']
+            propietario.email = informacion['email']
+            propietario.save()
+            propietarios = Propietario.objects.all() #Trae todo
+            return render(request, "PropietariosCRUD/read_propietarios.html", {"propietarios": propietarios})
+    else:
+        formulario = form_Propietarios(initial={'nombrecompleto': propietario.nombrecompleto, 'dni': propietario.dni,'telefono': propietario.telefono, 'email': propietario.email})
+    return render(request,"PropietariosCRUD/update_propietarios.html", {"formulario": formulario})
 
 
 
