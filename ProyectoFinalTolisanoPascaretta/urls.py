@@ -21,6 +21,5 @@ from ProyectoFinalTolisanoPascaretta.view import Inmobiliaria
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',Inmobiliaria),
     path("AppProyectoFinalTolisanoPascaretta/",include("AppProyectoFinalTolisanoPascaretta.urls"))
 ]

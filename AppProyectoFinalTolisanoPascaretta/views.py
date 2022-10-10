@@ -2,14 +2,23 @@ from operator import truediv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad
-from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios
+from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm
 
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+def home(request):
+    return render (request, "home.html")
+
+@login_required
 def Inmobiliaria (request):
     return render (request, "Inmobiliaria.html")
-
+    
+@login_required
 def Propietarios (request):
     if request.method == "POST":
         propietario = Propietario(nombrecompleto = request.POST['nombrecompleto'], dni = request.POST['dni'], telefono = request.POST['telefono'], email = request.POST['email'])
@@ -17,6 +26,8 @@ def Propietarios (request):
         return render(request, "Inmobiliaria.html")
     return render (request, "Propietarios.html")
 
+
+@login_required
 def buscar_Propietarios (request):
    if request.GET['dni']:
       dni = request.GET['dni']
@@ -26,6 +37,7 @@ def buscar_Propietarios (request):
      respuesta = "No se registró ingreso de datos"
      return HttpResponse(respuesta)
 
+@login_required
 def Inquilinos (request):
     if request.method == "POST":
         inquilino = Inquilino (nombrecompleto = request.POST["nombrecompleto"], dni = request.POST["dni"], telefono = request.POST["telefono"], email = request.POST["email"])
@@ -33,6 +45,8 @@ def Inquilinos (request):
         return render(request, "Inmobiliaria.html")
     return render (request, "Inquilinos.html")
 
+
+@login_required
 def buscar_Inquilinos (request):
    if request.GET['dni']:
       dni = request.GET['dni']
@@ -42,6 +56,7 @@ def buscar_Inquilinos (request):
      respuesta = "No se registró ingreso de datos"
      return HttpResponse(respuesta)
 
+@login_required
 def Propiedades(request):
     if request.method == "POST":
         propiedad = Propiedad (domicilio = request.POST["domicilio"])
@@ -50,6 +65,7 @@ def Propiedades(request):
     return render (request, "Propiedades.html")
 
 
+@login_required
 def buscar_Propiedades (request):
    if request.GET['domicilio']:
       domicilio = request.GET['domicilio']
@@ -57,8 +73,10 @@ def buscar_Propiedades (request):
       return render(request, "Propiedades.html", {"Propiedades": Propiedades})
    else:
      respuesta = "No se registró ingreso de datos"
-     return HttpResponse(respuesta)    
+     return HttpResponse(respuesta)
 
+
+@login_required
 def create_propietarios (request):
     if request.method == 'POST':
         propietario = Propietario(nombrecompleto = request.POST['nombrecompleto'], dni = request.POST['dni'], telefono = request.POST['telefono'], email = request.POST['email'])
@@ -67,11 +85,13 @@ def create_propietarios (request):
         return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
     return render(request, "PropietariosCRUD/create_propietarios.html")
 
-    
+
+@login_required    
 def read_propietarios (request=None):
     propietarios = Propietario.objects.all()
     return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
 
+@login_required
 def delete_propietarios (request, propietario_id):
     propietario = Propietario.objects.get(id = propietario_id)
     propietario.delete()
@@ -79,6 +99,7 @@ def delete_propietarios (request, propietario_id):
     return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
 
 
+@login_required
 def update_propietarios (request, propietario_id):
     propietario = Propietario.objects.get(id = propietario_id)
 
@@ -97,6 +118,41 @@ def update_propietarios (request, propietario_id):
     else:
         formulario = form_Propietarios(initial={'nombrecompleto': propietario.nombrecompleto, 'dni': propietario.dni,'telefono': propietario.telefono, 'email': propietario.email})
     return render(request,"PropietariosCRUD/update_propietarios.html", {"formulario": formulario})
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            user = form.cleaned_data.get('username')
+            pwd = form.cleaned_data.get('password')
+
+            user = authenticate(username = user, password = pwd)
+            
+            if user is not None:
+                login(request, user)
+                return render(request, "Inmobiliaria.html")
+            else:
+                return render(request, "login.html", {'form':form})
+        else:
+            return render(request, "login.html", {'form':form})
+    form = AuthenticationForm()
+    return render(request, 'login.html', {'form':form})
+
+
+def registro(request):
+    if request.method == 'POST':
+        #form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            #username = form.cleaned_data['username']
+            form.save() 
+            return redirect("/AppProyectoFinalTolisanoPascaretta/login")
+    #form = UserCreationForm()
+    else:
+        form = UserRegisterForm()
+        return render(request, 'registro.html', {'form':form})
+        
 
 
 

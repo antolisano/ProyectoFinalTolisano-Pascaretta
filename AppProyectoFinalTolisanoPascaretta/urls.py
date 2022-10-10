@@ -1,11 +1,12 @@
 from re import template
 from django.urls import path
 from AppProyectoFinalTolisanoPascaretta.views import *
-
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    path('',Inmobiliaria),
+    path('home/' ,home),
+    path('',home),
     path('Inmobiliaria/',Inmobiliaria),
     path('Inquilinos/',Inquilinos),
     path('Propiedades/',Propiedades),
@@ -17,6 +18,9 @@ urlpatterns = [
     path('read_propietarios/',read_propietarios),
     path('delete_propietarios/<propietario_id>',delete_propietarios),
     path('update_propietarios/<propietario_id>',update_propietarios),
+    path('login/',login_request),
+    path('registro/',registro),
+    path('logout/' ,LogoutView.as_view(template_name = 'home.html'), name = 'Logout'),
 
 
     
