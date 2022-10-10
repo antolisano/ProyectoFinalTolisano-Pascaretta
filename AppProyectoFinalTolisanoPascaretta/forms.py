@@ -28,7 +28,7 @@ class UserEditForm(UserChangeForm):
     first_name = forms.CharField(widget= forms.TextInput(attrs={'placeholder': 'Nombre'}))
     last_name = forms.CharField(widget= forms.TextInput(attrs={'placeholder': 'Apellido'}))
 
-class Meta:
-    model = User
-    fields = ['username','email','password', 'first_name', 'last_name']
-    help_texts = {k:"" for k in fields}    
+    class Meta:
+        model = User
+        fields = ['username','email','password', 'first_name', 'last_name']
+        help_texts = {k:"" for k in fields}    
