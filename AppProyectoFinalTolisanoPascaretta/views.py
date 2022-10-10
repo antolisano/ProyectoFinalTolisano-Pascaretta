@@ -2,12 +2,13 @@ from operator import truediv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad
-from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm
+from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm, UserEditForm
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -141,17 +142,41 @@ def login_request(request):
 
 
 def registro(request):
+    form = UserRegisterForm(request.POST)
     if request.method == 'POST':
-        #form = UserCreationForm(request.POST)
-        form = UserRegisterForm(request.POST)
+        
         if form.is_valid():
-            #username = form.cleaned_data['username']
             form.save() 
             return redirect("/AppProyectoFinalTolisanoPascaretta/login")
-    #form = UserCreationForm()
+    
+        else:
+            return render(request, "registro.html", {'form': form})
+    
+    form = UserRegisterForm()
+    return render(request, 'registro.html', {'form':form})
+
+
+@login_required
+def editarperfil(request):
+    usuario = request.user
+    user_basic_info = User.objects.get(id = usuario.id)
+    if request.method =='POST':
+        form = UserEditForm(request.POST, instance = usuario)
+        if form.is_valid():
+            user_basic_info.username = form.cleaned_data.get('username')
+            user_basic_info.email = form.cleaned_data.get('email')
+            user_basic_info.password = form.cleaned_data.get('password')
+            user_basic_info.first_name = form.cleaned_data.get('first_name')
+            user_basic_info.last_name = form.cleaned_data.get('last_name')
+            user_basic_info.save()
+            return render(request, 'Inmobiliaria.html')
+        else:
+            return render(request, 'Inmobiliaria.html', {'form':form})
     else:
-        form = UserRegisterForm()
-        return render(request, 'registro.html', {'form':form})
+        form = UserEditForm(initial={'username': usuario.username, 'email': usuario.email, 'password': usuario.password, 'first_name': usuario.first_name, 'last_name': usuario.last_name})         
+    return render(request, 'editarperfil.html', {'form': form, 'usuario': usuario})        
+
+            
         
 
 
