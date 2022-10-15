@@ -1,8 +1,8 @@
 from operator import truediv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad
-from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm, UserEditForm, ChangePasswordForm
+from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad, FotoPerfil
+from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm, UserEditForm, ChangePasswordForm, AvatarFormulario
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
@@ -193,6 +193,26 @@ def cambiopass(request):
 @login_required
 def perfilView(request):
     return render(request, 'perfil.html')
+
+def AgregarFoto(request):
+    if request.method == 'POST':
+        form = AvatarFormulario(request.POST, request.FILE)
+        if form.is_valid():
+            user = User.objects.get(username = request.user)
+            avatar = FotoPerfil(user = user, image = form.cleaned_data['Foto de Perfil'], id = request.user.id)
+            avatar.save()
+            avatar = FotoPerfil.objects.filter(user = request.user.id)
+            return render(request, 'Inmobiliaria.html', {'avatar':avatar[0].image.url})
+    else:
+        try:
+            avatar = FotoPerfil.objects.filter(user = request.user.id)
+            form = AvatarFormulario()
+        
+        except:
+            form = AvatarFormulario()
+
+    return render(request, 'AgragarFoto.html',  {'form': form})                    
+
 
 
             

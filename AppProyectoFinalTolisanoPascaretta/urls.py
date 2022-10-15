@@ -24,6 +24,7 @@ urlpatterns = [
     path('perfil/',perfilView),
     path('perfil/editarperfil/',editarperfil),
     path('perfil/cambiopass/',cambiopass),
+    path('perfil/cambiofotoperfil/' ,AgregarFoto)
     
 
 
