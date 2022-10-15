@@ -2,10 +2,10 @@ from operator import truediv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad
-from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm, UserEditForm
+from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm, UserEditForm, ChangePasswordForm
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -174,7 +174,21 @@ def editarperfil(request):
             return render(request, 'Inmobiliaria.html', {'form':form})
     else:
         form = UserEditForm(initial={'username': usuario.username, 'email': usuario.email, 'password': usuario.password, 'first_name': usuario.first_name, 'last_name': usuario.last_name})         
-    return render(request, 'editarperfil.html', {'form': form, 'usuario': usuario})        
+    return render(request, 'editarperfil.html', {'form': form, 'usuario': usuario})   
+
+
+@login_required
+def cambiopass(request):
+    usuario = request.user
+    if request.method =='POST':
+        form = ChangePasswordForm(data = request.POST, user = request.user)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return render(request, 'Inmobiliaria.html')
+    else:
+        form = ChangePasswordForm(user = request.user)
+    return render(request, 'cambiopass.html' , {'form': form, 'usuario': usuario})            
 
             
         
