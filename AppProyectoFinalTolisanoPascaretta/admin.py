@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Inquilino)
 admin.site.register(Propiedad)
 admin.site.register(Propietario)
+admin.site.register(FotoPerfil)

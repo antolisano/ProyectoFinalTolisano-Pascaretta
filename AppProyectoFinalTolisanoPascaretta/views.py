@@ -188,7 +188,12 @@ def cambiopass(request):
             return render(request, 'Inmobiliaria.html')
     else:
         form = ChangePasswordForm(user = request.user)
-    return render(request, 'cambiopass.html' , {'form': form, 'usuario': usuario})            
+    return render(request, 'cambiopass.html' , {'form': form, 'usuario': usuario})
+
+@login_required
+def perfilView(request):
+    return render(request, 'perfil.html')
+
 
             
         
