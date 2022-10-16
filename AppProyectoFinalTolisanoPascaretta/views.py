@@ -1,4 +1,4 @@
-from operator import truediv
+#from operator import truediv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad, FotoPerfil
@@ -17,14 +17,26 @@ def home(request):
 
 @login_required
 def Inmobiliaria (request):
-    return render (request, "Inmobiliaria.html")
+    avatar = FotoPerfil.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].imagen.url
+    except:
+        avatar = None     
+    return render(request, 'Inmobiliaria.html', {'avatar':avatar})
+    #return render (request, "Inmobiliaria.html")
     
 @login_required
 def Propietarios (request):
     if request.method == "POST":
         propietario = Propietario(nombrecompleto = request.POST['nombrecompleto'], dni = request.POST['dni'], telefono = request.POST['telefono'], email = request.POST['email'])
         propietario.save()
-        return render(request, "Inmobiliaria.html")
+        avatar = FotoPerfil.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].imagen.url
+        except:
+            avatar = None     
+        return render(request, 'Inmobiliaria.html', {'avatar':avatar})
+        #return render(request, "Inmobiliaria.html")
     return render (request, "Propietarios.html")
 
 
@@ -43,7 +55,13 @@ def Inquilinos (request):
     if request.method == "POST":
         inquilino = Inquilino (nombrecompleto = request.POST["nombrecompleto"], dni = request.POST["dni"], telefono = request.POST["telefono"], email = request.POST["email"])
         inquilino.save()
-        return render(request, "Inmobiliaria.html")
+        avatar = FotoPerfil.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].imagen.url
+        except:
+            avatar = None     
+        return render(request, 'Inmobiliaria.html', {'avatar':avatar})
+        #return render(request, "Inmobiliaria.html")
     return render (request, "Inquilinos.html")
 
 
@@ -62,7 +80,13 @@ def Propiedades(request):
     if request.method == "POST":
         propiedad = Propiedad (domicilio = request.POST["domicilio"])
         propiedad.save()
-        return render(request, "Inmobiliaria.html")
+        avatar = FotoPerfil.objects.filter(user = request.user.id)
+        try:
+            avatar = avatar[0].imagen.url
+        except:
+            avatar = None     
+        return render(request, 'Inmobiliaria.html', {'avatar':avatar})
+        #return render(request, "Inmobiliaria.html")
     return render (request, "Propiedades.html")
 
 
@@ -89,8 +113,13 @@ def create_propietarios (request):
 
 @login_required    
 def read_propietarios (request=None):
+    avatar = FotoPerfil.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].imagen.url
+    except:
+        avatar = None     
     propietarios = Propietario.objects.all()
-    return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios})
+    return render(request, "PropietariosCRUD/read_propietarios.html", {'propietarios': propietarios , 'avatar':avatar})
 
 @login_required
 def delete_propietarios (request, propietario_id):
@@ -132,7 +161,13 @@ def login_request(request):
             
             if user is not None:
                 login(request, user)
-                return render(request, "Inmobiliaria.html")
+                avatar = FotoPerfil.objects.filter(user = request.user.id)
+                try:
+                    avatar = avatar[0].imagen.url
+                except:
+                    avatar = None     
+                return render(request, 'Inmobiliaria.html', {'avatar':avatar})
+                #return render(request, "Inmobiliaria.html")
             else:
                 return render(request, "login.html", {'form':form})
         else:
@@ -169,9 +204,21 @@ def editarperfil(request):
             user_basic_info.first_name = form.cleaned_data.get('first_name')
             user_basic_info.last_name = form.cleaned_data.get('last_name')
             user_basic_info.save()
-            return render(request, 'Inmobiliaria.html')
+            avatar = FotoPerfil.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].imagen.url
+            except:
+                avatar = None     
+            return render(request, 'Inmobiliaria.html', {'avatar':avatar})
+            #return render(request, 'Inmobiliaria.html')
         else:
-            return render(request, 'Inmobiliaria.html', {'form':form})
+            avatar = FotoPerfil.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].imagen.url
+            except:
+                avatar = None     
+            return render(request, 'Inmobiliaria.html', {'form':form, 'avatar': avatar})
+            #return render(request, 'Inmobiliaria.html', {'form':form})
     else:
         form = UserEditForm(initial={'username': usuario.username, 'email': usuario.email, 'password': usuario.password, 'first_name': usuario.first_name, 'last_name': usuario.last_name})         
     return render(request, 'editarperfil.html', {'form': form, 'usuario': usuario})   
@@ -185,24 +232,39 @@ def cambiopass(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            return render(request, 'Inmobiliaria.html')
+            avatar = FotoPerfil.objects.filter(user = request.user.id)
+            try:
+                avatar = avatar[0].imagen.url
+            except:
+                avatar = None     
+            return render(request, 'Inmobiliaria.html', {'avatar':avatar})            
     else:
         form = ChangePasswordForm(user = request.user)
     return render(request, 'cambiopass.html' , {'form': form, 'usuario': usuario})
 
 @login_required
 def perfilView(request):
-    return render(request, 'perfil.html')
+    avatar = FotoPerfil.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].imagen.url
+    except:
+        avatar = None     
+    return render(request, 'perfil.html' , {'avatar':avatar})
 
+@login_required
 def AgregarFoto(request):
     if request.method == 'POST':
-        form = AvatarFormulario(request.POST, request.FILE)
+        form = AvatarFormulario(request.POST, request.FILES)
         if form.is_valid():
             user = User.objects.get(username = request.user)
-            avatar = FotoPerfil(user = user, image = form.cleaned_data['Foto de Perfil'], id = request.user.id)
+            avatar = FotoPerfil(user = user, imagen = form.cleaned_data['avatar'], id = request.user.id)
             avatar.save()
             avatar = FotoPerfil.objects.filter(user = request.user.id)
-            return render(request, 'Inmobiliaria.html', {'avatar':avatar[0].image.url})
+            try:
+                avatar = avatar[0].imagen.url
+            except:
+                avatar = None     
+            return render(request, 'Inmobiliaria.html', {'avatar':avatar})
     else:
         try:
             avatar = FotoPerfil.objects.filter(user = request.user.id)
