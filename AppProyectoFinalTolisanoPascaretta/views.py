@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad, FotoPerfil
-from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, form_Inquilinos, UserRegisterForm, UserEditForm, ChangePasswordForm, AvatarFormulario
+from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, form_Inquilinos, form_Propiedades, UserRegisterForm, UserEditForm, ChangePasswordForm, AvatarFormulario
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
@@ -155,8 +155,8 @@ def create_inquilinos (request):
     if request.method == 'POST':
         inquilino = Inquilino(nombrecompleto = request.POST['nombrecompleto'], dni = request.POST['dni'], telefono = request.POST['telefono'], email = request.POST['email'])
         inquilino.save()
-        inquilino = Inquilino.objects.all()
-        return render(request, "InquilinosCRUD/read_inquilinos.html", {'inquilino': inquilino})
+        inquilinos = Inquilino.objects.all()
+        return render(request, "InquilinosCRUD/read_inquilinos.html", {'inquilinos': inquilinos})
     return render(request, "InquilinosCRUD/create_inquilinos.html") 
 
 @login_required    
@@ -195,7 +195,50 @@ def update_inquilinos (request, inquilino_id):
             return render(request, "InquilinosCRUD/read_inquilinos.html", {"inquilinos": inquilinos})
     else:
         formulario = form_Inquilinos(initial={'nombrecompleto': inquilino.nombrecompleto, 'dni': inquilino.dni,'telefono': inquilino.telefono, 'email': inquilino.email})
-    return render(request,"InquilinosCRUD/update_inquilinos.html", {"formulario": formulario })             
+    return render(request,"InquilinosCRUD/update_inquilinos.html", {"formulario": formulario }) 
+
+@login_required
+def create_propiedades (request):
+    if request.method == 'POST':
+        propiedad = Propiedad(domicilio = request.POST['domicilio'])
+        propiedad.save()
+        propiedades = Propiedad.objects.all()
+        return render(request, "PropiedadesCRUD/read_propiedades.html", {'propiedades': propiedades})
+    return render(request, "PropiedadesCRUD/create_propiedades.html")
+
+@login_required    
+def read_propiedades (request=None):
+    avatar = FotoPerfil.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].imagen.url
+    except:
+        avatar = None     
+    propiedades = Propiedad.objects.all()
+    return render(request, "PropiedadesCRUD/read_propiedades.html", {'propiedades': propiedades , 'avatar':avatar})
+
+@login_required
+def delete_propiedades (request, propiedad_id):
+    propiedad = Propiedad.objects.get(id = propiedad_id)
+    propiedad.delete()
+    propiedades = Propiedad.objects.all()
+    return render(request, "PropiedadesCRUD/read_propiedades.html", {'propiedades': propiedades})
+
+@login_required
+def update_propiedades (request, propiedad_id):
+    propiedad = Propiedad.objects.get(id = propiedad_id)
+
+    if request.method == 'POST':
+        formulario = form_Propiedades(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            propiedad.domicilio = informacion['domicilio']
+            propiedad.save()
+            propiedades = Propiedad.objects.all() #Trae todo
+            return render(request, "PropiedadesCRUD/read_propiedades.html", {"propiedades": propiedades})
+    else:
+        formulario = form_Propiedades(initial={'domicilio': propiedad.domicilio})
+    return render(request,"PropiedadesCRUD/update_propiedades.html", {"formulario": formulario })                             
 
 
 def login_request(request):

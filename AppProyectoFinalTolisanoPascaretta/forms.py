@@ -17,6 +17,10 @@ class form_Inquilinos(forms.Form):
     telefono = forms.CharField()
     email = forms.EmailField()    
 
+class form_Propiedades(forms.Form):
+    domicilio = forms.CharField(max_length=30)
+           
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label="Contraseña", widget = forms.PasswordInput)

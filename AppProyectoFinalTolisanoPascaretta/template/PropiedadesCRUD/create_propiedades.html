@@ -1,0 +1,8 @@
+{% load static %}
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/myestilo.css'%}">
+
+<form class="formDataPropiedades" method="POST" action="/AppProyectoFinalTolisanoPascaretta/create_propiedades/">{% csrf_token %}
+    <input type="text" name="domicilio" placeholder="Domicilio">
+    <button type="submit" class="btn btn-primary btndj">Registrar</button>
+</form>
