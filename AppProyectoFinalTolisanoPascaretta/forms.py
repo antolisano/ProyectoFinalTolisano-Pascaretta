@@ -11,6 +11,12 @@ class form_Propietarios(forms.Form):
     telefono = forms.CharField()
     email = forms.EmailField()
 
+class form_Inquilinos(forms.Form):
+    nombrecompleto = forms.CharField(max_length=30)
+    dni = forms.IntegerField()
+    telefono = forms.CharField()
+    email = forms.EmailField()    
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label="Contraseña", widget = forms.PasswordInput)

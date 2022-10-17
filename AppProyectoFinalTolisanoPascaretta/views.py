@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from AppProyectoFinalTolisanoPascaretta.models import Propietario, Inquilino, Propiedad, FotoPerfil
-from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, UserRegisterForm, UserEditForm, ChangePasswordForm, AvatarFormulario
+from AppProyectoFinalTolisanoPascaretta.forms import form_Propietarios, form_Inquilinos, UserRegisterForm, UserEditForm, ChangePasswordForm, AvatarFormulario
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
@@ -148,6 +148,54 @@ def update_propietarios (request, propietario_id):
     else:
         formulario = form_Propietarios(initial={'nombrecompleto': propietario.nombrecompleto, 'dni': propietario.dni,'telefono': propietario.telefono, 'email': propietario.email})
     return render(request,"PropietariosCRUD/update_propietarios.html", {"formulario": formulario})
+
+
+@login_required
+def create_inquilinos (request):
+    if request.method == 'POST':
+        inquilino = Inquilino(nombrecompleto = request.POST['nombrecompleto'], dni = request.POST['dni'], telefono = request.POST['telefono'], email = request.POST['email'])
+        inquilino.save()
+        inquilino = Inquilino.objects.all()
+        return render(request, "InquilinosCRUD/read_inquilinos.html", {'inquilino': inquilino})
+    return render(request, "InquilinosCRUD/create_inquilinos.html") 
+
+@login_required    
+def read_inquilinos (request=None):
+    avatar = FotoPerfil.objects.filter(user = request.user.id)
+    try:
+        avatar = avatar[0].imagen.url
+    except:
+        avatar = None     
+    inquilinos = Inquilino.objects.all()
+    return render(request, "InquilinosCRUD/read_inquilinos.html", {'inquilinos': inquilinos , 'avatar':avatar})
+
+
+@login_required
+def delete_inquilinos (request, inquilino_id):
+    inquilino = Inquilino.objects.get(id = inquilino_id)
+    inquilino.delete()
+    inquilinos = Inquilino.objects.all()
+    return render(request, "InquilinosCRUD/read_inquilinos.html", {'inquilinos': inquilinos}) 
+
+@login_required
+def update_inquilinos (request, inquilino_id):
+    inquilino = Inquilino.objects.get(id = inquilino_id)
+
+    if request.method == 'POST':
+        formulario = form_Inquilinos(request.POST)
+
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            inquilino.nombrecompleto = informacion['nombrecompleto']
+            inquilino.dni = informacion['dni']
+            inquilino.telefono = informacion['telefono']
+            inquilino.email = informacion['email']
+            inquilino.save()
+            inquilinos = Inquilino.objects.all() #Trae todo
+            return render(request, "InquilinosCRUD/read_inquilinos.html", {"inquilinos": inquilinos})
+    else:
+        formulario = form_Inquilinos(initial={'nombrecompleto': inquilino.nombrecompleto, 'dni': inquilino.dni,'telefono': inquilino.telefono, 'email': inquilino.email})
+    return render(request,"InquilinosCRUD/update_inquilinos.html", {"formulario": formulario })             
 
 
 def login_request(request):
