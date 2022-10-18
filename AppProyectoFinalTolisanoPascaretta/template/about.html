@@ -1,9 +1,10 @@
 
-{% extends "home.html" %}
+
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/mystilo.css'%}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
 {% block contenido %}
+<img width="1365" height="300" src="https://cotedeco.com.ar/wp-content/uploads/2020/10/portada-nuestro-blog.jpg" class="attachment-full size-full" alt="" loading="lazy">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +15,27 @@
     <title>Acerca de Nosotros..</title>
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/AppProyectoFinalTolisanoPascaretta/home/">Home Inmobiliario</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="/AppProyectoFinalTolisanoPascaretta/about/">Nosotros</a>
+                </li>
+                <li class="nav-item" style="position: absolute; right: 110px; top: -15x">
+                  <a class="nav-link active" aria-current="page" href="/AppProyectoFinalTolisanoPascaretta/registro/">Registrate</a>            
+                </li>
+              </li>
+              <li class="nav-item" style="position: absolute; right: 0px">
+                  <a class="nav-link active" aria-current="page" href="/AppProyectoFinalTolisanoPascaretta/login/">Iniciar Sesion</a>
+              </li>
+      </header>
+      
     <h1>Acerca de nosotros..</h1>
 
     <h2>Matias Pascaretta y Aldana Tolisano</h2>
