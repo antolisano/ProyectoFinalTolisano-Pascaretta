@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'AppProyectoFinalTolisanoPascaretta',
+    'Appmensajeria',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'ProyectoFinalTolisanoPascaretta.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [f'{BASE_DIR}/ProyectoFinalTolisanoPascaretta/template', f'{BASE_DIR}/AppProyectoFinalTolisanoPascaretta/template'],
+        'DIRS': [f'{BASE_DIR}/ProyectoFinalTolisanoPascaretta/template', f'{BASE_DIR}/AppProyectoFinalTolisanoPascaretta/template', f'{BASE_DIR}/Appmensajeria/template' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

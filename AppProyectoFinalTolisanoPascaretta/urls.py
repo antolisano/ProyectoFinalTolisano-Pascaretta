@@ -2,11 +2,13 @@ from re import template
 from django.urls import path
 from AppProyectoFinalTolisanoPascaretta.views import *
 from django.contrib.auth.views import LogoutView
+from . import views
 
 
 urlpatterns = [
     path('home/' ,home),
     path('',home),
+    #path('', views.Inmobiliaria, name = 'Inmobiliaria'),
     path('Inmobiliaria/',Inmobiliaria),
     path('Inquilinos/',Inquilinos),
     path('Propiedades/',Propiedades),
