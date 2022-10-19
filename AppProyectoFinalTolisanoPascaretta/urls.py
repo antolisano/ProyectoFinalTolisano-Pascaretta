@@ -10,6 +10,8 @@ urlpatterns = [
     path('',home),
     path('about/', about),
     #path('', views.Inmobiliaria, name = 'Inmobiliaria'),
+    path('articulo1/', articulo1),
+    path('articulo2/', articulo2),
     path('Inmobiliaria/',Inmobiliaria),
     path('Inquilinos/',Inquilinos),
     path('Propiedades/',Propiedades),

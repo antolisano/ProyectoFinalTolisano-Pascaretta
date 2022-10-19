@@ -19,6 +19,13 @@ def home(request):
 def about(request):
     return render (request, "about.html")   
 
+def articulo1(request):
+    return render (request, "articulo1.html")
+
+def articulo2(request):
+    return render (request, "articulo2.html")
+
+
 @login_required
 def Inmobiliaria (request):
     avatar = FotoPerfil.objects.filter(user = request.user.id)
