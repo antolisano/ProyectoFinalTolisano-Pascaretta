@@ -19,6 +19,7 @@ class form_Inquilinos(forms.Form):
 
 class form_Propiedades(forms.Form):
     domicilio = forms.CharField(max_length=30)
+    
            
 
 class UserRegisterForm(UserCreationForm):

@@ -27,9 +27,11 @@ class Inquilino(models.Model):
 
 class Propiedad(models.Model):
     domicilio = models.CharField(max_length=60)
-
+    propietario = models.ForeignKey(Propietario, null = True, blank = True, on_delete = models.CASCADE)
+    inquilino = models.ForeignKey(Inquilino, null = True, blank = True, on_delete = models.RESTRICT)
     def __str__(self):
-       return f"Dirección: {self.domicilio}"
+        return f"Dirección: {self.domicilio} - Propietario: {self.propietario} - Inquilino: {self.inquilino}"
+       
 
 class FotoPerfil(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -225,6 +225,7 @@ def read_propiedades (request=None):
     except:
         avatar = None     
     propiedades = Propiedad.objects.all()
+    
     return render(request, "PropiedadesCRUD/read_propiedades.html", {'propiedades': propiedades , 'avatar':avatar})
 
 @login_required
